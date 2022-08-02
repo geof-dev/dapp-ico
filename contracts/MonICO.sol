@@ -54,9 +54,9 @@ contract MonICO is Ownable {
     }
 
     function withdrawTokens() public icoFinished {
-        uint256 amount = balances[msg.sender];
+        uint256 amount = balancesToken[msg.sender];
         require(amount > 0);
-        balances[msg.sender] = 0;
+        balancesToken[msg.sender] = 0;
         token.transfer(msg.sender, amount);
     }
 
@@ -66,5 +66,9 @@ contract MonICO is Ownable {
 
     function getBalanceToken() public view returns(uint256) {
         return balancesToken[msg.sender];
+    }
+
+    function changeClosingTime(uint256 _closingTime) public onlyOwner {
+        closingTime = _closingTime;
     }
 }
